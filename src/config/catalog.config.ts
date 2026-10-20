@@ -16,6 +16,7 @@ export interface LineConfig {
   title: string;
   tagline: string;
   lockedLabel: string;
+  emptyMessage: string;
   categories: CategoryConfig[];
 }
 
@@ -30,6 +31,7 @@ export const LINES: Record<ProductLine, LineConfig> = {
     title: "Colección",
     tagline: "Piezas numeradas. Cuando se acaban, no vuelven.",
     lockedLabel: "Próximamente",
+    emptyMessage: "Estamos terminando las primeras piezas. Escríbenos y te avisamos apenas salgan.",
     categories: [
       { id: "camisetas", label: "Camisetas", singular: "camiseta", whatsapp: ["573143370824", "573238492841"] },
       { id: "hoodies", label: "Hoodies", singular: "hoodie", whatsapp: ["573143370824", "573238492841"] },
@@ -43,8 +45,9 @@ export const LINES: Record<ProductLine, LineConfig> = {
     path: "/joyeria",
     sectionId: "catalogo",
     title: "Joyería",
-    tagline: "Plata, acero y cromo. Tirajes cortos, sin reposición.",
+    tagline: "Plata, acero y oro laminado.",
     lockedLabel: "Próximamente",
+    emptyMessage: "La primera colección de joyería está en el taller. Escríbenos y te avisamos apenas salga.",
     categories: [
       { id: "anillos", label: "Anillos", singular: "anillo" },
       { id: "collares", label: "Collares", singular: "collar" },

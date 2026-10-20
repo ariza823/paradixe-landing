@@ -16,6 +16,7 @@ import {
 import { CatalogFilters } from "./CatalogFilters.tsx";
 import { ProductCard } from "./ProductCard.tsx";
 import { ProductCardSkeleton } from "./ProductCardSkeleton.tsx";
+import { ComingSoon } from "./ComingSoon.tsx";
 
 interface CatalogSectionProps {
   readonly line: ProductLine;
@@ -51,6 +52,7 @@ export function CatalogSection({ line, isReleased }: CatalogSectionProps) {
     .filter((c) => c.count > 0);
 
   const isGrouped = filters.category === null && filters.sort === "featured";
+  const isEmptyLine = status === "ready" && lineProducts.length === 0;
   const titleId = `${lineConfig.sectionId}-title`;
 
   const renderContent = () => {
@@ -113,17 +115,23 @@ export function CatalogSection({ line, isReleased }: CatalogSectionProps) {
         <Text variant="muted">{lineConfig.tagline}</Text>
       </div>
 
-      <CatalogFilters
-        line={lineConfig}
-        filters={filters}
-        categories={categories}
-        total={lineProducts.length}
-        resultCount={visible.length}
-        onChange={update}
-        onReset={reset}
-      />
+      {isEmptyLine ? (
+        <ComingSoon line={lineConfig} />
+      ) : (
+        <>
+          <CatalogFilters
+            line={lineConfig}
+            filters={filters}
+            categories={categories}
+            total={lineProducts.length}
+            resultCount={visible.length}
+            onChange={update}
+            onReset={reset}
+          />
 
-      {renderContent()}
+          {renderContent()}
+        </>
+      )}
     </Section>
   );
 }
