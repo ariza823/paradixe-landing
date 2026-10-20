@@ -2,9 +2,9 @@ import type { SiteConfig } from "./site.types.ts";
 
 export const config: SiteConfig = {
   brand: { name: "Paradixe Urban", handle: "@paradixe_urban", city: "Bogotá" },
-  hero: { eyebrowLeft: "Dept. of Paradise ®", eyebrowRight: "SS/26 — BOG, CO" },
+  hero: { eyebrowLeft: "Dept. of Paradixe ®", eyebrowRight: "SS/26 — BOG, CO" },
   jewelry: {
-    eyebrowLeft: "Dept. of Paradise ®",
+    eyebrowLeft: "Dept. of Paradixe ®",
     eyebrowRight: "Joyería — BOG, CO",
     intro: "Piezas de metal hechas para durar más que la tendencia.",
   },
