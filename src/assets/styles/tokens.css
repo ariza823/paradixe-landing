@@ -1,0 +1,57 @@
+:root {
+  --purple-950: #100a1c;
+  --purple-900: #1a1230;
+  --purple-700: #4a3a6a;
+  --purple-600: #4a2a7a;
+  --purple-500: #5b4685;
+  --lilac-25: #f7f3ff;
+  --lilac-50: #eee6fb;
+  --lilac-100: #e9e2ff;
+  --lilac-200: #cdbcea;
+  --lilac-300: #b9a7e6;
+  --lilac-400: #b08bd8;
+  --lilac-600: #7e55b5;
+  --sky-300: #8ec5ee;
+  --gold-400: #d9a441;
+  --gold-700: #8a600f;
+  --green-400: #4fb848;
+  --red-400: #ff8a80;
+  --red-700: #b42318;
+  --white: #ffffff;
+
+  --surface: var(--lilac-25);
+  --surface-soft: var(--lilac-50);
+  --line: var(--lilac-200);
+  --ink: var(--purple-950);
+  --ink-muted: var(--purple-500);
+  --accent-sky: var(--sky-300);
+  --accent-lilac: var(--lilac-600);
+  --accent-deep: var(--purple-600);
+  --accent-gold: var(--gold-700);
+  --accent-green: var(--green-400);
+  --on-accent: var(--purple-950);
+  --danger: var(--red-700);
+  --focus: var(--purple-600);
+
+  --chrome-fill: var(--white);
+  --chrome-stroke: var(--purple-600);
+  --chrome-glow: rgb(176 139 216 / 0.4);
+  --grain-opacity: 0.08;
+}
+
+.dark {
+  --surface: var(--purple-950);
+  --surface-soft: var(--purple-900);
+  --line: var(--purple-700);
+  --ink: var(--lilac-100);
+  --ink-muted: var(--lilac-300);
+  --accent-lilac: var(--lilac-400);
+  --accent-gold: var(--gold-400);
+  --danger: var(--red-400);
+  --focus: var(--sky-300);
+
+  --chrome-fill: var(--lilac-100);
+  --chrome-stroke: var(--white);
+  --chrome-glow: rgb(142 197 238 / 0.45);
+  --grain-opacity: 0.14;
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paradixe Urban — Streetwear underground · Bogotá</title>
+    <meta
+      name="description"
+      content="Streetwear underground hecho en Bogotá. Piezas numeradas por drop: cuando se acaban, no vuelven. Pide la tuya por WhatsApp."
+    />
+    <meta name="theme-color" content="#100A1C" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:title" content="Paradixe Urban — Streetwear underground · Bogotá" />
+    <meta
+      property="og:description"
+      content="Piezas numeradas por drop. Cuando se acaban, no vuelven."
+    />
+    <meta property="og:image" content="https://paradixeurban.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://paradixeurban.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&family=Space+Mono:wght@400;700&family=UnifrakturCook:wght@700&display=swap"
+    />
+
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var theme = saved === 'light' || saved === 'dark'
+            ? saved
+            : window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          document.documentElement.classList.toggle('dark', theme === 'dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
