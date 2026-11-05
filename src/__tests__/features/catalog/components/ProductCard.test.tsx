@@ -1,4 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 import { ProductCard } from "@features/catalog/components/ProductCard.tsx";
 import { makeProduct } from "../../../fixtures/product.ts";
 
@@ -14,20 +16,52 @@ describe("ProductCard", () => {
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
 
-  it("usa los números de su categoría: dos en hoodies, uno en jeans", () => {
-    const { rerender } = render(<ProductCard product={makeProduct({ category: "hoodies" })} isReleased />);
-    const links = screen.getAllByRole("link", { name: /pedir por whatsapp al/i });
-    expect(links.map((l) => l.getAttribute("href")?.split("?")[0])).toEqual([
-      "https://wa.me/573143370824",
-      "https://wa.me/573238492841",
-    ]);
-    expect(screen.getByText("323 849 2841")).toBeInTheDocument();
+  it.each([
+    [0, "wa.me/573143370824"],
+    [0.99, "wa.me/573238492841"],
+  ])("muestra un solo botón con un número al azar de la categoría (%s)", (random, number) => {
+    const spy = vi.spyOn(Math, "random").mockReturnValue(random);
+    render(<ProductCard product={makeProduct({ category: "camisetas" })} isReleased />);
+    spy.mockRestore();
 
-    rerender(<ProductCard product={makeProduct({ category: "jeans" })} isReleased />);
+    expect(screen.getByRole("link", { name: /pedir por whatsapp/i })).toHaveAttribute(
+      "href",
+      expect.stringContaining(number),
+    );
+  });
+
+  it("usa el número de jeans", () => {
+    render(<ProductCard product={makeProduct({ category: "jeans" })} isReleased />);
     expect(screen.getByRole("link", { name: /pedir por whatsapp/i })).toHaveAttribute(
       "href",
       expect.stringContaining("wa.me/573015311468"),
     );
+  });
+
+  it("abre el detalle al tocar la foto, con el mismo número de WhatsApp de la tarjeta", async () => {
+    const user = userEvent.setup();
+    const product = makeProduct({ images: ["/a.webp"], description: "Algodón pesado." });
+    render(<ProductCard product={product} isReleased />);
+    const cardHref = screen.getByRole("link", { name: /pedir por whatsapp/i }).getAttribute("href");
+
+    await user.click(screen.getByRole("button", { name: "Ver detalle de Hoodie Cielo" }));
+
+    const dialog = screen.getByRole("dialog", { name: "Hoodie Cielo" });
+    expect(within(dialog).getByText("Algodón pesado.")).toBeInTheDocument();
+    expect(within(dialog).getByText("30 piezas")).toBeInTheDocument();
+    expect(within(dialog).getByRole("link", { name: /pedir por whatsapp/i })).toHaveAttribute("href", cardHref);
+
+    await user.click(within(dialog).getByRole("button", { name: "Cerrar" }));
+    expect(screen.queryByText("Algodón pesado.")).not.toBeInTheDocument();
+  });
+
+  it("el detalle de una prenda agotada no tiene botón de pedido", async () => {
+    const user = userEvent.setup();
+    render(<ProductCard product={makeProduct({ images: ["/a.webp"], status: "sold_out" })} isReleased />);
+
+    await user.click(screen.getByRole("button", { name: "Ver detalle de Hoodie Cielo" }));
+
+    expect(within(screen.getByRole("dialog")).queryByRole("link")).not.toBeInTheDocument();
   });
 
   it("muestra numeración, precio en COP y 'precio por confirmar' cuando es 0", () => {

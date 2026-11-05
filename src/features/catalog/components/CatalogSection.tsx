@@ -11,7 +11,7 @@ import { useCatalogFilters } from "../hooks/useCatalogFilters.ts";
 import {
   filterProducts,
   groupByCategory,
-  productsOfLine,
+  publicProductsOfLine,
 } from "../utils/filterProducts.ts";
 import { CatalogFilters } from "./CatalogFilters.tsx";
 import { ProductCard } from "./ProductCard.tsx";
@@ -43,7 +43,7 @@ export function CatalogSection({ line, isReleased }: CatalogSectionProps) {
   const { items, status, error, retry } = useCatalog();
   const { filters, update, reset } = useCatalogFilters();
 
-  const lineProducts = useMemo(() => productsOfLine(items, line), [items, line]);
+  const lineProducts = useMemo(() => publicProductsOfLine(items, line), [items, line]);
   const visible = useMemo(() => filterProducts(lineProducts, filters), [lineProducts, filters]);
   const categoryOrder = lineConfig.categories.map((c) => c.id);
 

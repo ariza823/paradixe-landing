@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Text from "@atoms/text/Text.tsx";
 import { LogoMark } from "@atoms/logo/Logo.tsx";
 import { ChevronLeftIcon, ChevronRightIcon } from "@atoms/icons/Icons.tsx";
@@ -9,6 +9,8 @@ interface ProductGalleryProps {
   readonly name: string;
   readonly edition: number;
   readonly isSoldOut: boolean;
+  readonly startIndex?: number;
+  readonly onOpen?: (index: number) => void;
 }
 
 function PhotoPlaceholder() {
@@ -41,10 +43,19 @@ function GalleryImage({ src, alt }: { readonly src: string; readonly alt: string
   );
 }
 
-export function ProductGallery({ images, name, edition, isSoldOut }: ProductGalleryProps) {
+export function ProductGallery({ images, name, edition, isSoldOut, startIndex = 0, onOpen }: ProductGalleryProps) {
   const trackRef = useRef<HTMLUListElement>(null);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(startIndex);
   const total = images.length;
+
+  useEffect(() => {
+    if (startIndex === 0) return undefined;
+    const frame = requestAnimationFrame(() => {
+      const track = trackRef.current;
+      if (track) track.scrollLeft = startIndex * track.clientWidth;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [startIndex]);
 
   const goTo = (next: number) => {
     const track = trackRef.current;
@@ -67,11 +78,26 @@ export function ProductGallery({ images, name, edition, isSoldOut }: ProductGall
           }}
           className="flex h-full snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {images.map((src, i) => (
-            <li key={src} className="h-full w-full shrink-0 snap-start">
-              <GalleryImage src={src} alt={total > 1 ? `${name}, foto ${i + 1} de ${total}` : name} />
-            </li>
-          ))}
+          {images.map((src, i) => {
+            const image = <GalleryImage src={src} alt={total > 1 ? `${name}, foto ${i + 1} de ${total}` : name} />;
+            return (
+              <li key={src} className="h-full w-full shrink-0 snap-start">
+                {onOpen ? (
+                  <button
+                    type="button"
+                    aria-label={`Ver detalle de ${name}`}
+                    tabIndex={i === index ? 0 : -1}
+                    onClick={() => onOpen(i)}
+                    className="block h-full w-full cursor-zoom-in -outline-offset-4 [&_img]:motion-safe:transition-transform [&_img]:motion-safe:duration-300 hover:[&_img]:scale-[1.03]"
+                  >
+                    {image}
+                  </button>
+                ) : (
+                  image
+                )}
+              </li>
+            );
+          })}
         </ul>
       )}
 
@@ -95,7 +121,7 @@ export function ProductGallery({ images, name, edition, isSoldOut }: ProductGall
           >
             <ChevronRightIcon size={18} />
           </button>
-          <div aria-hidden="true" className="absolute inset-x-0 bottom-3 flex justify-center gap-1.5">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center gap-1.5">
             {images.map((src, i) => (
               <span
                 key={src}

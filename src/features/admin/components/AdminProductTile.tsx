@@ -36,7 +36,7 @@ export function AdminProductTile({ product, onEdit, onDelete }: AdminProductTile
           <span className="flex h-full flex-col items-center justify-center gap-1 opacity-50">
             <LogoMark />
             <Text as="span" size="caption" variant="muted">
-              Sin fotos
+              Sin fotos · oculto en la web
             </Text>
           </span>
         )}
