@@ -6,7 +6,3 @@ export function productMessage(product: { name: string; variant?: string | null 
   const variant = product.variant ? ` (${product.variant})` : "";
   return `Hola Paradixe, me interesa ${product.name}${variant}. ¿Está disponible?`;
 }
-
-export function formatPhone(number: string): string {
-  return number.replace(/^57/, "").replace(/^(\d{3})(\d{3})(\d{4})$/, "$1 $2 $3");
-}

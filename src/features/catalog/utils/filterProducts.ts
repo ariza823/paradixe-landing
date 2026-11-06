@@ -38,6 +38,10 @@ export function productsOfLine(products: Product[], line: ProductLine): Product[
   return products.filter((p) => p.line === line);
 }
 
+export function publicProductsOfLine(products: Product[], line: ProductLine): Product[] {
+  return productsOfLine(products, line).filter((p) => p.images.length > 0);
+}
+
 export function filterProducts(products: Product[], filters: CatalogFilters): Product[] {
   const query = normalize(filters.query);
   return products

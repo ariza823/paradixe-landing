@@ -11,7 +11,7 @@ React 18 + TypeScript strict + Tailwind v4 + Vite + Redux Toolkit + React Router
 - `/` streetwear (hero + catálogo; countdown comentado), `/joyeria`, panel admin oculto en `/${VITE_ADMIN_PATH}` (default `/admin`; login + panel, lazy, sin links ni robots.txt que lo delaten)
 
 ## Structure
-- `src/config/` — `site.config.ts` (textos de negocio, WhatsApp, fecha del drop, FAQ) y `catalog.config.ts` (líneas y categorías; sin tallas: la landing solo muestra)
+- `src/config/` — `site.config.ts` (textos de negocio, WhatsApp, fecha del drop, FAQ) y `catalog.config.ts` (líneas y categorías; la talla es texto opcional por prenda, sin inventario: la landing solo muestra)
 - `src/core/` — `api/` (Supabase lazy), `store/` (rootReducer + hookStore), `slices/` (ui/toasts), `components/{atoms,molecules}`, `hooks/`, `utils/`
 - `src/features/{module}/{components|pages|templates|context|services|slices|schemas|dto|hooks|utils}` — catalog, admin, auth, home, jewelry, hero, how-to-buy, faq, theme
 - `src/routes/` — AppRoutes con lazy pages

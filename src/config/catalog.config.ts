@@ -69,6 +69,7 @@ export function categoryLabel(line: ProductLine, categoryId: string): string {
   return LINES[line].categories.find((c) => c.id === categoryId)?.label ?? categoryId;
 }
 
-export function categoryWhatsApp(line: ProductLine, categoryId: string): string[] {
-  return LINES[line].categories.find((c) => c.id === categoryId)?.whatsapp ?? [config.whatsapp.number];
+export function categoryWhatsApp(line: ProductLine, categoryId: string): string {
+  const numbers = LINES[line].categories.find((c) => c.id === categoryId)?.whatsapp ?? [];
+  return numbers[Math.floor(Math.random() * numbers.length)] ?? config.whatsapp.number;
 }

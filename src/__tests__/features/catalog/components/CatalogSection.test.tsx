@@ -32,10 +32,32 @@ describe("CatalogSection", () => {
   });
 
   it("muestra el catálogo normal cuando hay productos", async () => {
-    localStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify([makeProduct()]));
+    localStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify([makeProduct({ images: ["/a.webp"] })]));
     renderLine("streetwear");
 
     expect(await screen.findByRole("group", { name: "Categoría" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Próximamente" })).not.toBeInTheDocument();
+  });
+
+  it("oculta las prendas sin foto y su categoría", async () => {
+    localStorage.setItem(
+      DEMO_STORAGE_KEY,
+      JSON.stringify([
+        makeProduct({ images: ["/a.webp"] }),
+        makeProduct({ id: "p-2", name: "Jean Vacío", category: "jeans" }),
+      ]),
+    );
+    renderLine("streetwear");
+
+    expect(await screen.findByRole("heading", { name: "Hoodie Cielo" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Jean Vacío" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /jeans/i })).not.toBeInTheDocument();
+  });
+
+  it("muestra 'Próximamente' cuando ninguna prenda de la línea tiene foto", async () => {
+    localStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify([makeProduct()]));
+    renderLine("streetwear");
+
+    expect(await screen.findByRole("heading", { name: "Próximamente" })).toBeInTheDocument();
   });
 });

@@ -29,6 +29,7 @@ export function buildSeedProducts(): Product[] {
       category: group.category,
       name: `${group.label} N°${padNumber(index + 1)}`,
       variant: null,
+      size: null,
       description: null,
       price: 0,
       images: [],

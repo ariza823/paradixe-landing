@@ -27,12 +27,6 @@
     scroll-padding-top: 1rem;
   }
 
-  @media (width >= 48rem) {
-    html {
-      scroll-padding-top: 5rem;
-    }
-  }
-
   body {
     min-height: 100svh;
     overflow-x: clip;
@@ -114,6 +108,54 @@
   font-weight: 700;
   line-height: 1.1;
   transform: rotate(-3deg);
+}
+
+@utility chrome-frame {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(115deg, var(--accent-sky), var(--accent-lilac), var(--accent-deep), var(--accent-sky)) border-box;
+}
+
+@utility chrome-stack {
+  box-shadow:
+    3px 3px 0 var(--accent-sky),
+    6px 6px 0 var(--accent-lilac),
+    9px 9px 0 var(--accent-deep);
+}
+
+@utility ticket-card {
+  --ticket-line: var(--line);
+  border: 2px solid var(--ticket-line);
+  border-radius: 24px;
+  background-color: var(--surface-soft);
+}
+
+@utility ticket-stub {
+  position: relative;
+  border-top: 2px dashed var(--ticket-line);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -13px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--ticket-line);
+    border-radius: 50%;
+    background-color: var(--surface);
+  }
+
+  &::before {
+    left: -13px;
+    clip-path: inset(0 0 0 calc(50% - 1px));
+  }
+
+  &::after {
+    right: -13px;
+    clip-path: inset(0 calc(50% - 1px) 0 0);
+  }
 }
 
 @utility section-divider {
