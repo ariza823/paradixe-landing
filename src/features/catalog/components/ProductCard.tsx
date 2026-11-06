@@ -23,16 +23,18 @@ export function ProductCard({ product, isReleased }: ProductCardProps) {
   );
 
   return (
-    <article className="flex h-full flex-col border border-line bg-surface">
-      <ProductGallery
-        images={product.images}
-        name={product.name}
-        edition={product.edition}
-        isSoldOut={isSoldOut}
-        onOpen={setDetailIndex}
-      />
+    <article className="ticket-card flex h-full flex-col hover:chrome-stack hover:[--ticket-line:var(--accent-lilac)] motion-safe:transition-[translate,box-shadow,border-color] motion-safe:hover:-translate-x-1 motion-safe:hover:-translate-y-1">
+      <div className="overflow-hidden rounded-t-[22px]">
+        <ProductGallery
+          images={product.images}
+          name={product.name}
+          size={product.size}
+          isSoldOut={isSoldOut}
+          onOpen={setDetailIndex}
+        />
+      </div>
 
-      <div className="flex flex-1 flex-col gap-4 p-5">
+      <div className="ticket-stub flex flex-1 flex-col gap-4 p-5">
         <div className="flex flex-col gap-1">
           <Title as="h3" size="product">
             {product.name}

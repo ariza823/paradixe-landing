@@ -5,7 +5,7 @@ import { ProductCard } from "@features/catalog/components/ProductCard.tsx";
 import { makeProduct } from "../../../fixtures/product.ts";
 
 describe("ProductCard", () => {
-  it("enlaza a WhatsApp con el mensaje del producto, sin tallas", () => {
+  it("enlaza a WhatsApp con el mensaje del producto, sin selector de talla", () => {
     render(<ProductCard product={makeProduct({ category: "clasicos" })} isReleased />);
 
     expect(screen.queryByRole("group", { name: /talla/i })).not.toBeInTheDocument();
@@ -64,9 +64,16 @@ describe("ProductCard", () => {
     expect(within(screen.getByRole("dialog")).queryByRole("link")).not.toBeInTheDocument();
   });
 
-  it("muestra numeración, precio en COP y 'precio por confirmar' cuando es 0", () => {
+  it("muestra la talla solo si la prenda la tiene", () => {
+    const { rerender } = render(<ProductCard product={makeProduct({ size: "M" })} isReleased />);
+    expect(screen.getByText("Talla M")).toBeInTheDocument();
+
+    rerender(<ProductCard product={makeProduct()} isReleased />);
+    expect(screen.queryByText(/^talla/i)).not.toBeInTheDocument();
+  });
+
+  it("muestra precio en COP y 'precio por confirmar' cuando es 0", () => {
     const { rerender } = render(<ProductCard product={makeProduct()} isReleased />);
-    expect(screen.getByText("N°/030")).toBeInTheDocument();
     expect(screen.getByText(/180\.000/)).toBeInTheDocument();
 
     rerender(<ProductCard product={makeProduct({ price: 0 })} isReleased />);

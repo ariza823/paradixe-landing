@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "./header/Header.tsx";
 import { Footer } from "./footer/Footer.tsx";
+import { EasterEgg } from "./footer/EasterEgg.tsx";
 
 export function Layout() {
   return (
@@ -16,6 +17,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <EasterEgg />
     </>
   );
 }

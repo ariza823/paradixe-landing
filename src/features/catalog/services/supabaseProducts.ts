@@ -7,7 +7,7 @@ import type { Product, ProductInput } from "../dto/product.types.ts";
 import type { ProductRow, ProductsRepository } from "./productsService.types.ts";
 
 const COLUMNS =
-  "id, line, category, name, variant, description, price, images, edition, status, position, created_at";
+  "id, line, category, name, variant, size, description, price, images, edition, status, position, created_at";
 
 export function fromRow(row: ProductRow): Product {
   return {
@@ -16,6 +16,7 @@ export function fromRow(row: ProductRow): Product {
     category: row.category,
     name: row.name,
     variant: row.variant,
+    size: row.size,
     description: row.description,
     price: row.price,
     images: row.images,
@@ -32,6 +33,7 @@ export function toRow(input: ProductInput): Omit<ProductRow, "id" | "created_at"
     category: input.category,
     name: input.name,
     variant: input.variant,
+    size: input.size,
     description: input.description,
     price: input.price,
     images: input.images,

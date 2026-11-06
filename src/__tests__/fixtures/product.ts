@@ -7,6 +7,7 @@ export function makeProduct(overrides: Partial<Product> = {}): Product {
     category: "hoodies",
     name: "Hoodie Cielo",
     variant: "Negro",
+    size: null,
     description: null,
     price: 180000,
     images: [],

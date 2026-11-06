@@ -149,6 +149,14 @@ export function StarIcon(props: IconProps) {
   );
 }
 
+export function SparkleIcon({ size = 20 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+      <path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z" />
+    </svg>
+  );
+}
+
 export function MoonIcon(props: IconProps) {
   return (
     <StrokeIcon {...props}>

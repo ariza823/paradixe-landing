@@ -2,12 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import Text from "@atoms/text/Text.tsx";
 import { LogoMark } from "@atoms/logo/Logo.tsx";
 import { ChevronLeftIcon, ChevronRightIcon } from "@atoms/icons/Icons.tsx";
-import { padNumber } from "@core/utils/format.ts";
 
 interface ProductGalleryProps {
   readonly images: string[];
   readonly name: string;
-  readonly edition: number;
+  readonly size: string | null;
   readonly isSoldOut: boolean;
   readonly startIndex?: number;
   readonly onOpen?: (index: number) => void;
@@ -43,7 +42,7 @@ function GalleryImage({ src, alt }: { readonly src: string; readonly alt: string
   );
 }
 
-export function ProductGallery({ images, name, edition, isSoldOut, startIndex = 0, onOpen }: ProductGalleryProps) {
+export function ProductGallery({ images, name, size, isSoldOut, startIndex = 0, onOpen }: ProductGalleryProps) {
   const trackRef = useRef<HTMLUListElement>(null);
   const [index, setIndex] = useState(startIndex);
   const total = images.length;
@@ -132,14 +131,16 @@ export function ProductGallery({ images, name, edition, isSoldOut, startIndex = 
         </>
       )}
 
-      <Text
-        as="span"
-        size="label_bold"
-        variant="gold"
-        addStyle="pointer-events-none absolute top-3 left-3 border border-current bg-surface px-2 py-1 tracking-[2px]"
-      >
-        {`N°/${padNumber(edition, 3)}`}
-      </Text>
+      {size && (
+        <Text
+          as="span"
+          size="label_bold"
+          variant="gold"
+          addStyle="pointer-events-none absolute top-3 left-3 -rotate-3 rounded-full border border-current bg-surface px-3 py-1 tracking-[2px]"
+        >
+          {`Talla ${size}`}
+        </Text>
+      )}
 
       {isSoldOut && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">

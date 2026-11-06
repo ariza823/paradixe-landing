@@ -6,7 +6,7 @@ Dashboard: https://supabase.com/dashboard/project/zyniqiufdvewkdaatokl
 Sin variables de entorno el sitio corre en **modo demo** (seed + localStorage). Con ellas, todo lo que guardas en el panel queda en Supabase y se ve en producción.
 
 ## Qué hay en el catálogo
-La landing es una **vitrina**: muestra la pieza, fotos, precio y un botón a WhatsApp. **No maneja tallas**, ni en la base de datos, ni en el panel, ni en la tarjeta, para no comprometerse con ninguna.
+La landing es una **vitrina**: muestra la pieza, fotos, precio y un botón a WhatsApp. La talla es un **texto opcional** por prenda (`M`, `S, M, L`): se muestra en la foto si existe y no lleva inventario por talla.
 
 | Línea | Ruta | Categorías (`category`) | Espacios del seed |
 |---|---|---|---|
@@ -16,6 +16,7 @@ La landing es una **vitrina**: muestra la pieza, fotos, precio y un botón a Wha
 Cada producto tiene:
 - nombre;
 - color o variante;
+- talla (opcional, texto libre);
 - descripción;
 - precio en COP (`0` muestra "Precio por confirmar");
 - unidades (`N°/030`);
@@ -30,6 +31,7 @@ Ya está montada:
 - `supabase/migrations/20261020000000_catalog.sql` coincide con la versión corregida que corriste, sin las columnas de tallas.
 
 ### Pendiente
+- [ ] **SQL Editor** → correr `supabase/migrations/20261105000000_product_size.sql` **antes de publicar** el código que pide la columna `size`; sin ella el catálogo no carga.
 - [x] **SQL Editor** → correr `supabase/migrations/20261020010000_drop_sizes.sql`. Quita `sizes`, `sold_out_sizes` y el check `sold_out_subset` de tu base. El sitio funciona aunque no lo corras, pero así la base queda igual al código.
 - [x] **SQL Editor** → correr `supabase/seed.sql`. Crea los 33 espacios de la tabla de arriba en "Próximamente". Solo inserta si `products` está vacía, así que repetirlo no duplica nada.
 - [ ] **Local:** el `.env` ya existe con las tres variables. Reinicia `pnpm dev`.

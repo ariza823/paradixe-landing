@@ -162,6 +162,14 @@ export function ProductFormDialog({ open, line, product, presetCategory, onClose
           error={errors.variant?.message}
           {...register("variant")}
         />
+        <TextField
+          id="product-size"
+          label="Talla (opcional)"
+          placeholder="M o S, M, L"
+          maxLength={20}
+          error={errors.size?.message}
+          {...register("size")}
+        />
         <TextAreaField
           id="product-description"
           label="Descripción (opcional)"

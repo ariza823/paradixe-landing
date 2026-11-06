@@ -10,7 +10,7 @@ interface ProductActionProps {
   readonly isLocked: boolean;
 }
 
-const buttonClasses = "w-full px-4 tracking-[1px]";
+const buttonClasses = "w-full px-4 tracking-[1px]! [&_svg]:shrink-0";
 
 export function ProductAction({ product, whatsappNumber, isLocked }: ProductActionProps) {
   if (isLocked) {

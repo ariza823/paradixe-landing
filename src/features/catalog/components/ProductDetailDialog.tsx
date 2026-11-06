@@ -36,7 +36,7 @@ export function ProductDetailDialog({ product, open, startIndex, onClose, action
         <ProductGallery
           images={product.images}
           name={product.name}
-          edition={product.edition}
+          size={product.size}
           isSoldOut={product.status === "sold_out"}
           startIndex={startIndex}
         />
