@@ -16,6 +16,7 @@ Landing y catálogo de **Paradixe Urban**, marca de streetwear y joyería de Bog
 - **Catálogo con filtros en la URL:** categoría con conteo, "solo disponibles", orden (destacados, precio, más nuevos) y búsqueda sin tildes. Los links se pueden compartir, por ejemplo `/?cat=hoodies&disp=1`.
 - **Tarjeta de producto:**
   - Galería con scroll-snap: se desliza en móvil y tiene flechas en escritorio.
+
   - Al tocar la foto se abre el detalle: foto grande, precio, descripción, edición, estado y botón de pedido.
   - Badge de edición (`N°/030`) y precio en COP. Con precio 0 dice "Precio por confirmar".
   - Comportamiento según el estado:
@@ -24,6 +25,7 @@ Landing y catálogo de **Paradixe Urban**, marca de streetwear y joyería de Bog
     - **Agotado:** foto en gris con sello.
 - **Solo se muestra lo que tiene foto:** una prenda sin fotos queda oculta en la web y sigue visible en el panel.
 - **Pantalla de Próximamente** cuando una línea no tiene productos con foto todavía, con un botón de "Avísame por WhatsApp".
+
 - **Sin tallas, a propósito:** el sitio es una vitrina y no se compromete con stock por talla.
 - **Panel admin oculto:**
   - Login con Supabase Auth.

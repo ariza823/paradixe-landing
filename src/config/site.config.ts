@@ -27,7 +27,7 @@ export const config: SiteConfig = {
     "Escríbenos por WhatsApp; te confirmamos disponibilidad.",
     "Pagas (Nequi, Daviplata, Bre-B o link de pago) y te la enviamos.",
   ],
-  shipping: "Envíos en Bogotá en [X] días y a todo Colombia en [X] días.",
+  shipping: "Envíos en Bogotá y a todo Colombia.",
   faq: [
     { q: "¿Cuánto tarda el envío?", a: "[Tiempos de envío en Bogotá y resto del país]" },
     { q: "¿Puedo hacer cambios?", a: "[Política de cambios: plazo y condiciones]" },
